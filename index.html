@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ludo Board - Exact Replica</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="splash-screen">
+        <audio id="intro-music" loop>
+            <source src="CID INTRO.mp3" type="audio/mpeg">
+        </audio>
+
+        <div id="splash-logo">
+            <i class="fas fa-dice" style="font-size: 50px; margin-bottom: 10px;"></i><br>
+            LUDO KING
+        </div>
+
+        <div id="player-options">
+            <p>Select Mode</p>
+            <button onclick="startGame(2)">2 Players</button>
+            <button onclick="startGame(3)">3 Players</button>
+            <button onclick="startGame(4)">4 Players</button>
+        </div>
+    </div>
+
+    <div id="game-board-screen" style="display: none;">
+        
+        <div class="main-wrapper">
+            <div class="top-badge">LUDO SOLO MODE</div>
+            
+            <div class="game-container">
+                <div class="profiles-row">
+                    <div id="group-green" style="display: flex; gap: 12px; align-items: flex-end;">
+                        <div class="profile-box p-green"><i class="fas fa-user avatar-icon"></i></div>
+                    </div>
+                    
+                    <div id="group-yellow" style="display: flex; gap: 12px; align-items: flex-end;">
+                        <div class="profile-box p-yellow"><i class="fas fa-user avatar-icon"></i></div>
+                    </div>
+                </div>
+
+                <div class="ludo-board">
+                    <div class="home green-home">
+                        <div class="home-inner">
+                            <div class="token" style="display:flex; justify-content:center; align-items:center;" id="green-base-1"><div class="ludo-goti goti-green" id="g1"></div></div>
+                            <div class="token" style="display:flex; justify-content:center; align-items:center;" id="green-base-2"><div class="ludo-goti goti-green" id="g2"></div></div>
+                            <div class="token" style="display:flex; justify-content:center; align-items:center;" id="green-base-3"><div class="ludo-goti goti-green" id="g3"></div></div>
+                            <div class="token" style="display:flex; justify-content:center; align-items:center;" id="green-base-4"><div class="ludo-goti goti-green" id="g4"></div></div>
+                        </div>
+                    </div>
+                    <div class="home yellow-home">
+                        <div class="home-inner">
+                            <div class="token" style="display:flex; justify-content:center; align-items:center;" id="yellow-base-1"><div class="ludo-goti goti-yellow" id="y1"></div></div>
+                            <div class="token" style="display:flex; justify-content:center; align-items:center;" id="yellow-base-2"><div class="ludo-goti goti-yellow" id="y2"></div></div>
+                            <div class="token" style="display:flex; justify-content:center; align-items:center;" id="yellow-base-3"><div class="ludo-goti goti-yellow" id="y3"></div></div>
+                            <div class="token" style="display:flex; justify-content:center; align-items:center;" id="yellow-base-4"><div class="ludo-goti goti-yellow" id="y4"></div></div>
+                        </div>
+                    </div>
+                    <div class="home red-home">
+                        <div class="home-inner">
+                            <div class="token" style="display:flex; justify-content:center; align-items:center;" id="red-base-1"><div class="ludo-goti goti-red" id="r1"></div></div>
+                            <div class="token" style="display:flex; justify-content:center; align-items:center;" id="red-base-2"><div class="ludo-goti goti-red" id="r2"></div></div>
+                            <div class="token" style="display:flex; justify-content:center; align-items:center;" id="red-base-3"><div class="ludo-goti goti-red" id="r3"></div></div>
+                            <div class="token" style="display:flex; justify-content:center; align-items:center;" id="red-base-4"><div class="ludo-goti goti-red" id="r4"></div></div>
+                        </div>
+                    </div>
+                    <div class="home blue-home">
+                        <div class="home-inner">
+                            <div class="token" style="display:flex; justify-content:center; align-items:center;" id="blue-base-1"><div class="ludo-goti goti-blue" id="b1"></div></div>
+                            <div class="token" style="display:flex; justify-content:center; align-items:center;" id="blue-base-2"><div class="ludo-goti goti-blue" id="b2"></div></div>
+                            <div class="token" style="display:flex; justify-content:center; align-items:center;" id="blue-base-3"><div class="ludo-goti goti-blue" id="b3"></div></div>
+                            <div class="token" style="display:flex; justify-content:center; align-items:center;" id="blue-base-4"><div class="ludo-goti goti-blue" id="b4"></div></div>
+                        </div>
+                    </div>
+                    
+                    <div class="top-path">
+                        <div class="cell"></div><div class="cell arrow-icon yellow-arrow"><i class="fas fa-chevron-down"></i></div><div class="cell"></div>
+                        <div class="cell"></div><div class="cell"></div><div class="cell star-icon"><i class="far fa-star"></i></div> 
+                        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+                        <div class="cell star-icon"><i class="far fa-star"></i></div><div class="cell"></div><div class="cell"></div> 
+                        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+                        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+                    </div>
+                    
+                    <div class="green-path">
+                        <div class="cell"></div><div class="cell star-icon"><i class="far fa-star"></i></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div> 
+                        <div class="cell arrow-icon green-arrow"><i class="fas fa-chevron-right"></i></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+                        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell star-icon"><i class="far fa-star"></i></div><div class="cell"></div><div class="cell"></div> 
+                    </div>
+                    
+                    <div class="blue-path">
+                        <div class="cell"></div><div class="cell"></div><div class="cell star-icon"><i class="far fa-star"></i></div><div class="cell"></div><div class="cell"></div><div class="cell"></div> 
+                        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell arrow-icon blue-arrow"><i class="fas fa-chevron-left"></i></div>
+                        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell star-icon"><i class="far fa-star"></i></div><div class="cell"></div> 
+                    </div>
+                    
+                    <div class="red-path">
+                        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+                        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+                        <div class="cell"></div><div class="cell"></div><div class="cell star-icon"><i class="far fa-star"></i></div> 
+                        <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+                        <div class="cell star-icon"><i class="far fa-star"></i></div><div class="cell"></div><div class="cell"></div> 
+                        <div class="cell"></div><div class="cell arrow-icon red-arrow"><i class="fas fa-chevron-up"></i></div><div class="cell"></div>
+                    </div>
+                    
+                    <div class="center-triangle-container">
+                        <div class="triangle tri-top"></div>
+                        <div class="triangle tri-right"></div>
+                        <div class="triangle tri-bottom"></div>
+                        <div class="triangle tri-left"></div>
+                        <div class="center-lines"></div>
+                    </div>
+                </div>
+
+                <div class="profiles-row">
+                    <div id="group-red" style="display: flex; gap: 12px; align-items: flex-end;">
+                        <div class="profile-box p-red"><i class="fas fa-user avatar-icon"></i></div>
+                        <div class="profile-wrapper">
+                            </div>
+                    </div>
+                    
+                    <div id="group-blue" style="display: flex; gap: 12px; align-items: flex-end;">
+                        <div class="profile-wrapper">
+                        
+                        <div class="profile-box p-blue"><i class="fas fa-user avatar-icon"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dice-container" class="dice-box-container" style="display:none;">
+        <i class="fas fa-dice-five"></i>
+        <div class="dice-text">ROLL<br>DICE</div>
+    </div>
+
+    <div id="intro-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-box">
+            <h3>Welcome!</h3>
+            <p>Apna apna character choose kar lein!</p>
+            <button onclick="closeIntroModal()">OK</button>
+        </div>
+    </div>
+
+    <div id="selection-menu" class="modal-overlay" style="display: none; align-items: flex-end;">
+        <div class="bottom-sheet">
+            <h3>Select Avatar</h3>
+            <div class="image-grid">
+                <div class="img-option" id="img1" onclick="selectImage('IMG1.jpeg', 'IMG1.jpeg')">Img.1</div>
+                <div class="img-option" id="img2" onclick="selectImage('img2', 'IMG2.jpeg')">Img.2</div>
+                <div class="img-option" id="img3" onclick="selectImage('img3', 'IMG3.jpeg')">Img.3</div>
+                <div class="img-option" id="img4" onclick="selectImage('img4', 'IMG4.jpeg')">Img.4</div>
+                <div class="img-option" id="img5" onclick="selectImage('img5', 'IMG5.jpeg')">Img.5</div>
+                <div class="img-option" id="img6" onclick="selectImage('img6', 'IMG6.jpeg')">Img.6</div>
+                
+                <label class="img-option camera-btn">
+                    <i class="fas fa-camera"></i> Camera
+                    <input type="file" accept="image/*" capture="environment" id="camera-input" style="display:none;" onchange="handleCamera(event)">
+                </label>
+            </div>
+            <button class="close-btn" onclick="closeSelectionMenu()">Cancel</button>
+        </div>
+    </div>
+
+    <audio id="start-music">
+        <source src="start-music.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="sfx-dice">
+        <source src="dice touch-music.mp3" type="audio/ogg">
+    </audio>
+    <audio id="sfx-spawn">
+        <source src="CID PLAY ACTIVE.mp3" type="audio/ogg">
+    </audio>
+    <audio id="sfx-move">
+        <source src="MOVE.mp3" type="audio/ogg">
+    </audio>
+    <audio id="sfx-touch">
+        <source src="TOKEN SOUND.mp3" type="audio/ogg">
+    </audio>
+    <audio id="sfx-kill">
+        <source src="ek jhaat bar ka KILLING -SOUND.mp3" type="audio/ogg">
+    </audio>
+    <audio id="sfx-win">
+        <source src="CID PLAY ACTIVE.mp3" type="audio/ogg">
+    </audio>
+
+    <div id="ready-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-box">
+            <h3>All Players Set!</h3>
+            <p>Ready for game ??</p>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button class="btn-yes" onclick="handleReady(true)">YES</button>
+                <button class="btn-no" onclick="handleReady(false)">NO</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

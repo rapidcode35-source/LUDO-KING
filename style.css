@@ -1,0 +1,496 @@
+
+
+/* ========================================= */
+/* NAYI CSS - SPLASH SCREEN KE LIYE          */
+/* ========================================= */
+
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+#splash-logo {
+    font-size: 35px;
+    font-weight: 900;
+    color: var(--red);
+    text-align: center;
+    text-shadow: 2px 2px 0px white;
+    position: absolute;
+    top: 50%; /* Center mein start hoga */
+    transform: translateY(-50%);
+    transition: top 1s ease-in-out, transform 1s ease-in-out; /* Smooth animation upar jane ki */
+}
+
+/* Ye class JS lagayega logo ko upar bhejne ke liye */
+#splash-logo.move-up {
+    top: 15%; 
+    transform: translateY(0);
+}
+
+#player-options {
+    position: absolute;
+    top: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    opacity: 0; /* Shuru mein gayab */
+    pointer-events: none;
+    transition: opacity 1s ease-in; /* Dheere se appear hoga */
+    text-align: center;
+}
+
+#player-options p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 5px;
+}
+
+/* Jab option dikhana ho */
+#player-options.show-options {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#player-options button {
+    background: linear-gradient(145deg, #fff, #e6e6e6);
+    border: 2px solid #ccc;
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    border-radius: 25px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+#player-options button:active {
+    transform: scale(0.95);
+    background: #e6e6e6;
+}
+
+
+
+
+
+
+/* ========================================= */
+/* MODALS AUR SELECTION MENU CSS             */
+/* ========================================= */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-box {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    width: 80%;
+    max-width: 300px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.modal-box h3 { margin-top: 0; color: #333; }
+.modal-box p { color: #555; font-weight: bold; margin-bottom: 20px; }
+.modal-box button {
+    background: var(--green); color: white; border: none; padding: 10px 30px;
+    border-radius: 10px; font-weight: bold; font-size: 16px; cursor: pointer;
+}
+
+/* Bottom Sheet (Avatar Menu) */
+.bottom-sheet {
+    background: white;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 20px 20px 0 0;
+    padding: 20px;
+    box-sizing: border-box;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.img-option {
+    background: #f0f0f0;
+    height: 80px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #555;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+}
+
+.camera-btn { background: #333; color: white; border-color: #222; }
+
+.close-btn {
+    width: 100%; background: #ff4444; color: white; border: none; padding: 12px;
+    border-radius: 10px; font-weight: bold; font-size: 16px; cursor: pointer;
+}
+
+/* Grey Out Filter - Jo select ho jayega uspe ye lagega */
+.used-image {
+    filter: grayscale(100%) brightness(50%);
+    pointer-events: none;
+    border-color: #555;
+    color: #aaa;
+}
+
+/* Jab avatar set ho jaye, icon chupane ke liye */
+.has-avatar .avatar-icon { display: none; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+* {
+    box-sizing: border-box; /* Ensures padding doesn't break widths on mobile */
+}
+
+:root {
+    --bg-color: #DBD3C5;
+    --board-bg: #F5F1E5;
+    --grid-line: #6A635B;
+    --green: #44AD52;
+    --yellow: #F9D63F;
+    --red: #E73F38;
+    --blue: #3D98E5;
+}
+
+body {
+    margin: 0;
+    padding: 15px; /* Added padding for mobile edges */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden; /* Prevents horizontal scroll */
+}
+
+.main-wrapper {
+    position: relative;
+    padding-top: 20px;
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Top Header */
+.top-badge {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 5px 15px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #555;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    letter-spacing: 0.5px;
+    z-index: 10;
+    white-space: nowrap;
+}
+
+.game-container {
+    width: 100%; /* Changed from fixed 420px to responsive 100% */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* --- PROFILES LAYOUT --- */
+.profiles-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.profile-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-box {
+    width: 75px;
+    height: 75px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar-icon { font-size: 45px; }
+
+/* Specific Profile Styles */
+.p-green { background-color: #8FD894; border: 3px solid var(--green); color: #2E7D32; }
+.p-green .avatar-icon { transform: rotate(-90deg); }
+
+.p-yellow { background-color: #FDE87B; border: 3px solid var(--yellow); color: #B08D00; }
+.p-yellow .avatar-icon { transform: rotate(180deg); }
+
+.p-blue { background-color: #8ECAEE; border: 3px solid var(--blue); color: #1565C0; }
+.p-blue .avatar-icon { transform: rotate(90deg); }
+
+.p-red { background-color: #F35F57; border: 3px solid #E54138; color: #8B0000; box-shadow: 0 0 20px 5px rgba(255, 0, 0, 0.6), inset 0 0 10px rgba(255,0,0,0.3); }
+
+.p-grey { background-color: #8C8781; color: white; border: none; }
+.p-grey .dots { font-size: 20px; letter-spacing: 2px; line-height: 1; margin-top: -5px; }
+.p-grey .text { font-size: 9px; margin-top: 6px; font-weight: normal; }
+
+/* Bottom Row Specials */
+.player-label { position: absolute; top: -18px; font-size: 10px; font-weight: 800; color: #222; width: max-content; }
+.thinking-label-bottom { position: absolute; bottom: -18px; font-size: 10px; color: #444; width: max-content; }
+.dice-box-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(145deg, #f0f0f0, #d4d4d4);
+    padding: 10px 18px;
+    border-radius: 16px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1), inset 0 2px 4px white;
+    height: 75px;
+}
+.dice-box-container i { font-size: 32px; color: #333; }
+.dice-box-container .dice-text { font-size: 13px; font-weight: bold; color: #333; line-height: 1.1; text-align: center; }
+
+/* --- LUDO BOARD --- */
+.ludo-board {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background-color: var(--board-bg);
+    border: 2px solid var(--grid-line);
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    grid-template-rows: repeat(15, 1fr);
+    position: relative;
+}
+
+.cell { border: 0.5px solid var(--grid-line); display: flex; justify-content: center; align-items: center; }
+
+/* Home areas */
+.home { grid-column: span 6; grid-row: span 6; padding: 12%; }
+.green-home { background-color: var(--green); grid-area: 1 / 1 / 7 / 7; }
+.yellow-home { background-color: var(--yellow); grid-area: 1 / 10 / 7 / 16; }
+.red-home { background-color: var(--red); grid-area: 10 / 1 / 16 / 7; }
+.blue-home { background-color: var(--blue); grid-area: 10 / 10 / 16 / 16; }
+
+.home-inner { background-color: white; width: 100%; height: 100%; border-radius: 18px; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; place-items: center; padding: 12px; }
+.token { width: 65%; aspect-ratio: 1/1; border-radius: 50%; border: 1px solid rgba(0,0,0,0.1); }
+.green-home .token { background-color: var(--green); }
+.yellow-home .token { background-color: var(--yellow); }
+.red-home .token { background-color: var(--red); }
+.blue-home .token { background-color: var(--blue); }
+
+/* Path Grids */
+.top-path { grid-area: 1 / 7 / 7 / 10; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(6, 1fr); }
+.green-path { grid-area: 7 / 1 / 10 / 7; display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(3, 1fr); }
+.blue-path { grid-area: 7 / 10 / 10 / 16; display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(3, 1fr); } 
+.red-path { grid-area: 10 / 7 / 16 / 10; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(6, 1fr); }
+
+/* Symmetrical Path Coloring */
+.top-path > .cell:nth-child(5), .top-path > .cell:nth-child(8), .top-path > .cell:nth-child(11), 
+.top-path > .cell:nth-child(14), .top-path > .cell:nth-child(17), .top-path > .cell:nth-child(6) { background-color: var(--yellow); }
+
+.green-path > .cell:nth-child(8), .green-path > .cell:nth-child(9), .green-path > .cell:nth-child(10), 
+.green-path > .cell:nth-child(11), .green-path > .cell:nth-child(12), .green-path > .cell:nth-child(2) { background-color: var(--green); }
+
+.blue-path > .cell:nth-child(7), .blue-path > .cell:nth-child(8), .blue-path > .cell:nth-child(9), 
+.blue-path > .cell:nth-child(10), .blue-path > .cell:nth-child(11), .blue-path > .cell:nth-child(17) { background-color: var(--blue); }
+
+.red-path > .cell:nth-child(2), .red-path > .cell:nth-child(5), .red-path > .cell:nth-child(8), 
+.red-path > .cell:nth-child(11), .red-path > .cell:nth-child(14), .red-path > .cell:nth-child(13) { background-color: var(--red); }
+
+/* Icons inside cells */
+.arrow-icon { color: #444; font-size: clamp(10px, 3vw, 14px); font-weight: bold; }
+.star-icon { color: #333; font-size: clamp(12px, 4vw, 18px); }
+.red-arrow { color: var(--red); }
+.yellow-arrow { color: var(--yellow); }
+.green-arrow { color: var(--green); }
+.blue-arrow { color: var(--blue); }
+
+/* CENTER TRIANGLES */
+.center-triangle-container {
+    grid-area: 7 / 7 / 10 / 10;
+    position: relative;
+    background-color: transparent;
+    overflow: hidden;
+}
+.triangle { position: absolute; width: 0; height: 0; border-style: solid; }
+/* Using percentages for responsive center triangles */
+.tri-top { border-width: 15vw 15vw 0 15vw; max-border-width: 42px; border-color: var(--yellow) transparent transparent transparent; top: 0; left:0; width: 100%; height: 50%; border-left: 50px solid transparent; border-right: 50px solid transparent; border-top: 50px solid var(--yellow); }
+.tri-right { border-color: transparent var(--blue) transparent transparent; right: 0; top:0; width: 50%; height: 100%; border-top: 50px solid transparent; border-bottom: 50px solid transparent; border-right: 50px solid var(--blue);}
+.tri-bottom { border-color: transparent transparent var(--red) transparent; bottom: 0; left:0; width: 100%; height: 50%; border-left: 50px solid transparent; border-right: 50px solid transparent; border-bottom: 50px solid var(--red);}
+.tri-left { border-color: transparent transparent transparent var(--green); left: 0; top:0; width: 50%; height: 100%; border-top: 50px solid transparent; border-bottom: 50px solid transparent; border-left: 50px solid var(--green);}
+
+.center-lines { position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; }
+.center-lines::before { content: ''; position: absolute; width: 145%; height: 1px; background: var(--grid-line); top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(45deg); }
+.center-lines::after { content: ''; position: absolute; width: 145%; height: 1px; background: var(--grid-line); top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); }
+
+/* ========================================= */
+/* MEDIA QUERIES FOR MOBILE RESPONSIVENESS   */
+/* ========================================= */
+
+@media (max-width: 450px) {
+    .profile-box { width: 65px; height: 65px; border-radius: 14px; }
+    .avatar-icon { font-size: 38px; }
+    .dice-box-container { height: 65px; padding: 8px 12px; gap: 8px; }
+    .dice-box-container i { font-size: 28px; }
+    .dice-box-container .dice-text { font-size: 11px; }
+    .home-inner { padding: 8px; border-radius: 12px; }
+    .player-label { font-size: 9px; top: -15px; }
+    .thinking-label-bottom { font-size: 9px; bottom: -15px; }
+}
+
+@media (max-width: 380px) {
+    .profile-box { width: 55px; height: 55px; border-radius: 12px; }
+    .avatar-icon { font-size: 32px; }
+    .dice-box-container { height: 55px; padding: 5px 10px; gap: 6px; border-radius: 12px; }
+    .dice-box-container i { font-size: 24px; }
+    .dice-box-container .dice-text { font-size: 10px; }
+    .p-grey .dots { font-size: 16px; }
+    .p-grey .text { font-size: 8px; margin-top: 4px; }
+    .player-label { font-size: 8px; top: -14px; }
+    .thinking-label-bottom { font-size: 8px; bottom: -14px; }
+    .home { padding: 8%; }
+    .home-inner { padding: 6px; border-radius: 10px; }
+}
+
+@media (max-width: 320px) {
+    /* For very small devices like iPhone SE */
+    .profile-box { width: 48px; height: 48px; border-radius: 10px; }
+    .avatar-icon { font-size: 28px; }
+    .dice-box-container { height: 48px; padding: 4px 8px; gap: 4px; }
+    .dice-box-container i { font-size: 20px; }
+    .dice-box-container .dice-text { font-size: 8px; }
+    .p-grey .text { font-size: 7px; }
+}
+
+
+/* Ready Modal Buttons */
+.modal-box .btn-yes { background-color: var(--green); width: 100px; color: white; }
+.modal-box .btn-no { background-color: var(--red); width: 100px; color: white; }
+
+
+
+
+
+/* ========================================= */
+/* LUDO TOKENS (GOTIYAN) CSS                 */
+/* ========================================= */
+.ludo-goti {
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4), inset 0 -3px 5px rgba(0,0,0,0.2);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    z-index: 10;
+    transition: all 0.3s ease; /* Jab ye move hogi toh smoothly uregi */
+}
+
+/* Colors for tokens */
+.goti-red { background: radial-gradient(circle at 30% 30%, #ff4d4d, #b30000); }
+.goti-green { background: radial-gradient(circle at 30% 30%, #4dff4d, #008000); }
+.goti-yellow { background: radial-gradient(circle at 30% 30%, #ffff4d, #b3b300); }
+.goti-blue { background: radial-gradient(circle at 30% 30%, #4da6ff, #0059b3); }
+
+/* Animation jab goti click hone ke liye ready ho (Blink effect) */
+.goti-active {
+    animation: bounce-goti 1s infinite alternate;
+    cursor: pointer;
+    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes bounce-goti {
+    from { transform: scale(1) translateY(0); }
+    to { transform: scale(1.1) translateY(-5px); }
+}
+
+
+
+/* Goti raste par dikhne ke liye fix */
+.cell { position: relative; }
+.cell .ludo-goti {
+    width: 80% !important;
+    height: 80% !important;
+    position: absolute;
+    z-index: 100;
+}
+
+/* Premium Jump Animation */
+@keyframes tokenJump {
+    0% { transform: scale(1) translateY(0); }
+    50% { transform: scale(1.2) translateY(-15px); }
+    100% { transform: scale(1) translateY(0); }
+}
+.animate-jump {
+    animation: tokenJump 0.3s ease-in-out;
+}
+
+/* Dice Container Placement */
+#dice-container {
+    position: absolute;
+    z-index: 500;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
