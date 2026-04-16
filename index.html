@@ -149,14 +149,18 @@
     <div id="selection-menu" class="modal-overlay" style="display: none; align-items: flex-end;">
         <div class="bottom-sheet">
             <h3>Select Avatar</h3>
-            <div class="image-grid">
-                <div class="img-option" id="img1" onclick="selectImage('IMG1.jpeg', 'IMG1.jpeg')">Img.1</div>
-                <div class="img-option" id="img2" onclick="selectImage('img2', 'IMG2.jpeg')">Img.2</div>
-                <div class="img-option" id="img3" onclick="selectImage('img3', 'IMG3.jpeg')">Img.3</div>
-                <div class="img-option" id="img4" onclick="selectImage('img4', 'IMG4.jpeg')">Img.4</div>
-                <div class="img-option" id="img5" onclick="selectImage('img5', 'IMG5.jpeg')">Img.5</div>
-                <div class="img-option" id="img6" onclick="selectImage('img6', 'IMG6.jpeg')">Img.6</div>
-                
+<div class="image-grid">
+    <div class="img-option" id="img1" style="background-image: url('IMG1.jpeg');" onclick="selectImage('img1', 'IMG1.jpeg')"></div>
+    
+    <div class="img-option" id="img2" style="background-image: url('IMG2.jpeg');" onclick="selectImage('img2', 'IMG2.jpeg')"></div>
+    
+    <div class="img-option" id="img3" style="background-image: url('IMG3.jpeg');" onclick="selectImage('img3', 'IMG3.jpeg')"></div>
+    
+    <div class="img-option" id="img4" style="background-image: url('IMG4.jpeg');" onclick="selectImage('img4', 'IMG4.jpeg')"></div>
+    
+    <div class="img-option" id="img5" style="background-image: url('IMG5.jpeg');" onclick="selectImage('img5', 'IMG5.jpeg')"></div>
+    
+    <div class="img-option" id="img6" style="background-image: url('IMG6.jpeg');" onclick="selectImage('img6', 'IMG6.jpeg')"></div>                
                 <label class="img-option camera-btn">
                     <i class="fas fa-camera"></i> Camera
                     <input type="file" accept="image/*" capture="environment" id="camera-input" style="display:none;" onchange="handleCamera(event)">
